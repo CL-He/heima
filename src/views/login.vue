@@ -8,15 +8,20 @@
         <span class="iconfont iconnew"></span>
       </div>
       <div class="inputs">
-        <input placeholder="请输入手机号" class="input" />
-        <input placeholder="密码" class="input" type="password" />
+        <hminput
+          placeholder="请输入用户名/手机号"
+          v-model="users.username"
+          :rules="/^1\d{10}$/"
+          msg-err="手机号输入不合法,请输入11位手机号"
+        ></hminput>
+        <hminput type="password"></hminput>
       </div>
       <p class="tips">
         没有账号？
         <a href="#/register" class>去注册</a>
       </p>
       <!-- 使用 -->
-      <hmbutton text='登录' @click="login"></hmbutton>
+      <hmbutton text="登录" @click="login"></hmbutton>
     </div>
   </div>
 </template>
@@ -24,14 +29,28 @@
 <script>
 // 引入按钮文件
 import hmbutton from '@/components/hm-button.vue'
+// 引入输入框文件
+import hminput from '@/components/hm-input.vue'
 export default {
+  data () {
+    return {
+      users: {
+        username: '',
+        password: ''
+      }
+    }
+  },
   // 注册
   components: {
-    hmbutton
+    hmbutton,
+    hminput
   },
   methods: {
     login (event) {
-      console.log(event)
+      console.log(this.users)
+    },
+    handlerinput (data) {
+      this.users.username = data
     }
   }
 }
@@ -40,6 +59,8 @@ export default {
 <style lang='less'>
 .container {
   padding: 20px;
+  height: 100vh;
+  background-color: rgb(242, 242, 242);
 }
 
 .close {
