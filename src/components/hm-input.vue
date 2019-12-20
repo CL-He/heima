@@ -1,5 +1,6 @@
 <template>
-  <input type="text"
+  <input
+  type="text"
    class="inp"
    :value="value"
    @input="handlerinput"
@@ -13,6 +14,9 @@ export default {
     return {
       statu: false
     }
+  },
+  mounted () {
+    this.statu = !!this.value
   },
   // rules文本框的验证规则
   //  msg_err:输入不合法时的提示文本
@@ -29,14 +33,17 @@ export default {
         } else {
           this.statu = false
         }
-        this.$emit('input', value)
+      } else {
+        this.statu = !!value
       }
+      this.$emit('input', value)
     },
     // 响应文本框失去焦点的变化
     handlerblur (event) {
-      if (this.rules && this.rules.test(event.target.value)) {
+      if (this.rules && !this.rules.test(event.target.value)) {
         //   给出提示
-        console.log(this.msg_err)
+        // console.log(this.msg_err)
+        this.$toast.fail(this.msg_err)
       }
     }
   }

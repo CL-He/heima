@@ -5,7 +5,7 @@ import router from '@/router/index.js'
 import App from '@/App.vue'
 // 引入初始化样式文件
 import '@/styles/animate.css'
-// 引入提示用的插件
+// 引入提示用的vant插件
 import { Toast, Icon } from 'vant'
 Vue.use(Toast)
 Vue.use(Icon)
